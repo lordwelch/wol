@@ -202,8 +202,10 @@ func handleStatus(w http.ResponseWriter, r *http.Request) {
 
 func isAddressReachable(addr string) (bool, error) {
 	pinger, err := probing.NewPinger(addr)
+	// This error is from resolving a host that's currently off may not have a dns entry and we don't want to spam the log.
+	// We could display this in the web interface in the future instead of ignoring it.
 	if err != nil {
-		return false, fmt.Errorf("error creating pinger: %v", err)
+		return false, nil
 	}
 	// Set privileged mode based on config
 	pinger.SetPrivileged(cfg.Ping.Privileged)
