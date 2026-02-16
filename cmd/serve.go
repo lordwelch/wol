@@ -104,7 +104,7 @@ func handleWake(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("Sending magic packet to %s", mac)
 	mp := magicpacket.NewMagicPacket(mac)
-	if err := mp.Broadcast(); err != nil {
+	if err := mp.Broadcast(cfg.Server.Interface); err != nil {
 		log.Printf("Error sending magic packet: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

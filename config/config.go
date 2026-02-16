@@ -34,6 +34,8 @@ type Machine struct {
 type Server struct {
 	// Listen address for the server
 	Listen string `koanf:"listen"`
+	// Interface to send WOL packets to
+	Interface string `koanf:"interface"`
 }
 
 // Ping represents the ping configuration

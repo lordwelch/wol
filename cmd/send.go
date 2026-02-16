@@ -62,7 +62,7 @@ var sendCmd = &cobra.Command{
 
 		log.Printf("Sending magic packet to %s", mac)
 		mp := magicpacket.NewMagicPacket(mac)
-		if err := mp.Broadcast(); err != nil {
+		if err := mp.Broadcast(cfg.Server.Interface); err != nil {
 			cobra.CheckErr(err)
 		}
 
